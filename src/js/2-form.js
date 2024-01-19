@@ -1,10 +1,13 @@
 "use strict";
 
-const formLinkAcsess = document.querySelector(".feedback-form");
+const feedbackForm = document.querySelector(".feedback-form");
+const btnSubmit = document.querySelector('button');
 
-formLinkAcsess.addEventListener("click", handlerSaveValueFields); 
 
-function handlerSaveValueFields(event){
+feedbackForm.addEventListener("input", saveFormInput);
+btnSubmit.addEventListener("submit", clearFormSubmit);
+
+function saveFormInput(event){
   event.preventDefault();
   const emailValue = event.currentTarget.elements.email.value;
   console.log(emailValue);
@@ -18,13 +21,20 @@ function handlerSaveValueFields(event){
       
     }
     addToLocalStarage(objValue);
+
   };
 
-  const STORAGE_KEY = "tasks";
+  const STORAGE_KEY = "feedback-form-state";
 
 
 function addToLocalStarage(task){
- const arrayTasks = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)): [];
-  arrayTasks.push(task);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(arrayTasks));
+ const tasks = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)): [];
+ 
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(task));
 };
+
+
+function clearFormSubmit(event){
+  event.preventDefault();
+  feedbackForm.reset();
+}

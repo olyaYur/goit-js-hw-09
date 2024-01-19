@@ -1,5 +1,5 @@
 "use strict";
-console.log('Hello');
+
 // Описаний в документації
 import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
@@ -74,7 +74,7 @@ const images = [
   
   const gallery = document.querySelector(".gallery");
   
-  gallery.innerHTML = images.reduce((html, item) => html + 
+  const markup = images.reduce((html, item) => html + 
   `<li class="gallery-item">
     <a class="gallery-link" href="${item.original}">
       <img
@@ -85,5 +85,6 @@ const images = [
     </a>
   </li>`,"");
   
+  gallery.innerHTML = markup;
 
-  var lightbox = new SimpleLightbox('.gallery a', {captionsData: "alt", captionDelay: 250});
+  const lightbox = new SimpleLightbox('.gallery a', {captionsData: "alt", captionDelay: 250});
