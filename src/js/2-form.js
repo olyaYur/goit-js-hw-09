@@ -1,40 +1,30 @@
 "use strict";
 
-const feedbackForm = document.querySelector(".feedback-form");
+const form = document.querySelector(".feedback-form");
 const btnSubmit = document.querySelector('button');
+const input = document.querySelector('input');
+const STORAGE_KEY = "feedback-form-state";
 
 
-feedbackForm.addEventListener("input", saveFormInput);
-btnSubmit.addEventListener("submit", clearFormSubmit);
-
-function saveFormInput(event){
+form.addEventListener('input', event => {
   event.preventDefault();
   const emailValue = event.currentTarget.elements.email.value;
-  console.log(emailValue);
   const messageValue = event.currentTarget.elements.message.value;
-  console.log(messageValue);
 
     // field to object
     const objValue = {
-      emailValue,
-      messageValue ,
-      
+      email: emailValue,
+      message: messageValue,
     }
-    addToLocalStarage(objValue);
-
-  };
-
-  const STORAGE_KEY = "feedback-form-state";
-
-
-function addToLocalStarage(task){
- const tasks = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)): [];
- 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(task));
-};
-
-
-function clearFormSubmit(event){
+    console.log(objValue);  
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(objValue));
+  
+})
+  form.addEventListener('submit', event =>{
   event.preventDefault();
-  feedbackForm.reset();
-}
+  console.log(localStorage.getItem(STORAGE_KEY));
+  localStorage.removeItem(STORAGE_KEY);
+  form.reset();
+})
+
+ 
