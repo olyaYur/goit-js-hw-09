@@ -1,14 +1,16 @@
 "use strict";
 
 const form = document.querySelector(".feedback-form");
-const emailInput = document.querySelector('input');
-const messageInput = document.querySelector('textarea');
+const emailInput = document.querySelector('[name="email"]');
+const messageInput = document.querySelector('[name="message"]');
 const STORAGE_KEY = "feedback-form-state";
+
+
 
 form.addEventListener('input', () => {
   const data = {
-    email: emailInput.value,
-    message: messageInput.value
+    email: emailInput.value.trim(),
+    message: messageInput.value.trim()
   };
   localStorage.setItem('feedback-form-state', JSON.stringify(data));
 });
@@ -27,8 +29,8 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   
   const data = {
-    email: emailInput.value,
-    message: messageInput.value
+    email: emailInput.value.trim(),
+    message: messageInput.value.trim()
   };
 
 
